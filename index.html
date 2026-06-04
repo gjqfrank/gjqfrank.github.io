@@ -20,30 +20,92 @@
         .home-page {
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
             align-items: center;
             min-height: 100vh;
-            padding: 20px;
+            padding: 60px 20px 40px;
         }
         .home-page.hidden {
             display: none;
         }
-        .home-title {
-            font-size: 48px;
-            margin-bottom: 20px;
+        /* 打招呼动画区域 */
+        .hello-section {
             text-align: center;
+            margin-bottom: 60px;
+            width: 100%;
         }
-        .home-subtitle {
+        .hello-text {
+            font-size: 64px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .hello-text .wave-hand {
+            display: inline-block;
+            animation: wave 1.5s infinite;
+            transform-origin: 70% 70%;
+        }
+        @keyframes wave {
+            0% { transform: rotate(0deg); }
+            10% { transform: rotate(14deg); }
+            20% { transform: rotate(-8deg); }
+            30% { transform: rotate(14deg); }
+            40% { transform: rotate(-4deg); }
+            50% { transform: rotate(10deg); }
+            60% { transform: rotate(0deg); }
+            100% { transform: rotate(0deg); }
+        }
+        .hello-name {
+            font-size: 32px;
+            color: #667eea;
+            margin-bottom: 15px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+            animation-delay: 0.3s;
+        }
+        .hello-intro {
             font-size: 18px;
             color: #888;
-            margin-bottom: 40px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+            animation-delay: 0.6s;
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        /* 项目列表区域 */
+        .projects-section {
+            width: 100%;
+            max-width: 900px;
+        }
+        .projects-header {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 30px;
             text-align: center;
+            color: #fff;
+            position: relative;
+        }
+        .projects-header::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 10px auto 0;
+            border-radius: 2px;
         }
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
-            max-width: 900px;
             width: 100%;
         }
         .project-card {
@@ -51,14 +113,20 @@
             border-radius: 15px;
             padding: 30px;
             text-align: center;
-            transition: transform 0.3s, background 0.3s;
+            transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
             cursor: pointer;
             border: 1px solid rgba(255, 255, 255, 0.2);
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
         }
+        .project-card:nth-child(1) { animation-delay: 0.9s; }
+        .project-card:nth-child(2) { animation-delay: 1.1s; }
+        .project-card:nth-child(3) { animation-delay: 1.3s; }
         .project-card:hover {
             transform: translateY(-5px);
             background: rgba(255, 255, 255, 0.15);
             border-color: #667eea;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
         }
         .project-icon {
             font-size: 40px;
@@ -235,10 +303,20 @@
 <body>
     <!-- 主页 -->
     <div class="home-page" id="homePage">
-        <h1 class="home-title">Frank's Projects</h1>
-        <p class="home-subtitle">个人项目集合</p>
-        <div class="projects-grid">
-            <div class="project-card" onclick="navigateTo('#molecularmass')">
+        <!-- 打招呼动画区域 -->
+        <div class="hello-section">
+            <div class="hello-text">
+                <span class="wave-hand">👋</span> Hello!
+            </div>
+            <div class="hello-name">I'm Frank</div>
+            <div class="hello-intro">Welcome to my personal project showcase</div>
+        </div>
+        
+        <!-- 项目列表区域 -->
+        <div class="projects-section">
+            <div class="projects-header">My Projects</div>
+            <div class="projects-grid">
+                <div class="project-card" onclick="navigateTo('#molecularmass')">
                 <div class="project-icon">⚗️</div>
                 <div class="project-name">分子质量计算器</div>
                 <div class="project-desc">输入化学式，计算分子质量</div>
@@ -251,6 +329,7 @@
                 <div class="project-desc">项目描述</div>
             </div>
             -->
+            </div>
         </div>
     </div>
 
